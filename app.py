@@ -87,12 +87,10 @@ mydata['job_prestige_binned'] = pd.cut(mydata.job_prestige, 6)
 #                                                                                                                  '(58.667, 69.333]',
 #                                                                                                                  '(69.333, 80.0]'])
 ## Reorder the bins 
-mydata.job_prestige_binned = mydata.job_prestige_binned.cat.reorder_categories(['(15.936, 26.667]',
-                                                                                                                 '(26.667, 37.333]',
-                                                                                                                 '(37.333, 48.0]',
-                                                                                                                 '(48.0, 58.667]',
-                                                                                                                 '(58.667, 69.333]',
-                                                                                                                 '(69.333, 80.0]'])
+mydata.job_prestige_binned = mydata.job_prestige_binned.astype('str')
+order = ['(15.936, 26.667]', '(26.667, 37.333]', '(37.333, 48.0]', '(48.0, 58.667]', '(58.667, 69.333]', '(69.333, 80.0]']
+mydata.job_prestige_binned = mydata.job_prestige_binned.astype('category').cat.reorder_categories(order)
+
 ## Drop rows with missing data
 mydata = mydata.dropna()
 ## Create a facet grid with 3 rows and 2 columns 
