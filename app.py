@@ -109,6 +109,7 @@ groupby = ['sex', 'region', 'education']
 
 ##app = JupyterDash(__name__, external_stylesheets=external_stylesheets)
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 
 app.layout = html.Div(
     [
