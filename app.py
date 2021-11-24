@@ -8,10 +8,12 @@ from dash import html
 from dash.dependencies import Input, Output
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
+
 # Load data
 gss = pd.read_csv("https://github.com/jkropko/DS-6001/raw/master/localdata/gss2018.csv",
                  encoding='cp1252', na_values=['IAP','IAP,DK,NA,uncodeable', 'NOT SURE',
                                                'DK', 'IAP, DK, NA, uncodeable', '.a', "CAN'T CHOOSE"])
+
 
 # Data cleaning
 mycols = ['id', 'wtss', 'sex', 'educ', 'region', 'age', 'coninc',
@@ -35,12 +37,14 @@ gss_clean = gss_clean.rename({'wtss':'weight',
 gss_clean.sex = gss_clean.sex.replace({'female': 'women', 'male': 'men'})
 gss_clean.age = gss_clean.age.replace({'89 or older':'89'})
 gss_clean.age = gss_clean.age.astype('float')
-         
+ 
+  
 # This is the text
 markdown_text = '''There is a gender wage gap in the United States. As of 2020, women earn 82 cents for every dollar a man earns, according to data from the Bureau of Labor Statistics. [This is in part due to historical funneling of women into unpaid or low-pay caregiver roles and men into higher-pay trades such as construction](https://americanprogress.org/article/quick-facts-gender-wage-gap/). While efforts such as increase educational attainment by women have closed the gap (the gap has closed by 4 cents in over a decade), more work needs to be done. [Women still earn less than men in nearly all occupations and women earn less than their same race and ethnicity counterpart at every level of educational attainment](https://blog.dol.gov/2021/03/19/5-facts-about-the-state-of-the-gender-pay-gap), according to the Department of Labor Blog. 
 
 The General Social Survey (GSS) has surveyed adults in the United States since 1972. According to the GSS website, the survey collects data on contemporary American society in order to monitor and explain trends in opinions, attitudes and behaviors. Our dataset contains demographics and attitudes about gender roles and income. For an example of how the GSS measures variables such as Occupational Prestige, please see [methodology](http://gss.norc.org/Documents/reports/methodological-reports/MR122%20Occupational%20Prestige.pdf). For a list of questions asked such as "It is much better for everyone involved if the man is the achiever outside the home and the woman takes care of the home and family", please see [codebook](http://www.gss.norc.org/Documents/codebook/GSS%202021%20Codebook%20R1.pdf).
 '''
+
 
 # This is the table 
 ## that shows the mean income, occupational prestige, socioeconomic index, and years of education for men and for women
