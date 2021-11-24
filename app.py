@@ -77,35 +77,25 @@ fig_box2.update_layout(showlegend=False)
 # This is the interactive facet grid
 ## Create a new dataframe 
 mydata = gss_clean[['income', 'sex', 'job_prestige']]
-## Create new features that breaks job_prestige into six categories with equally sized ranges
-mydata['job_prestige_binned'] = pd.cut(mydata.job_prestige, 6)
-## Reorder the bins 
-# mydata.job_prestige_binned = mydata.job_prestige_binned.astype('str').astype('category').cat.reorder_categories(['(15.936, 26.667]',
-#                                                                                                                  '(26.667, 37.333]',
-#                                                                                                                  '(37.333, 48.0]',
-#                                                                                                                  '(48.0, 58.667]',
-#                                                                                                                  '(58.667, 69.333]',
-#                                                                                                                  '(69.333, 80.0]'])
-## Reorder the bins 
-mydata.job_prestige_binned = mydata.job_prestige_binned.astype('str')
-order = ['(15.936, 26.667]', '(26.667, 37.333]', '(37.333, 48.0]', '(48.0, 58.667]', '(58.667, 69.333]', '(69.333, 80.0]']
-mydata.job_prestige_binned = mydata.job_prestige_binned.astype('category').cat.reorder_categories(order)
 
 ## Drop rows with missing data
 mydata = mydata.dropna()
+
+## Create new features that breaks job_prestige into six categories with equally sized ranges
+mydata['job_prestige_binned'] = pd.cut(mydata.job_prestige, 6)
+
+## Reorder the bins 
+mydata.job_prestige_binned = mydata.job_prestige_binned.astype('str')
+order = ['(15.936, 26.667]', '(26.667, 37.333]', '(37.333, 48.0]', '(48.0, 58.667]', '(58.667, 69.333]', '(69.333, 80.0]']
+mydata.job_prestige_binned = mydata.job_prestige_binned.astype('category').cat.reorder_categories(order)   
+
 ## Create a facet grid with 3 rows and 2 columns 
 fig_facet = px.box(mydata, x = 'sex', y = 'income', color = 'sex', 
              labels = {'income':'Income', 'sex': ''}, 
              facet_col = 'job_prestige_binned', facet_col_wrap = 2,
              color_discrete_map = {'men':'blue', 'women':'red'}, 
-             category_orders={'job_prestige_binned': ['(15.936, 26.667]',
-                                                            '(26.667, 37.333]',
-                                                            '(37.333, 48.0]',
-                                                            '(48.0, 58.667]',
-                                                            '(58.667, 69.333]',
-                                                            '(69.333, 80.0]']}, height=1500)
+             category_orders={'job_prestige_binned': order}, height=1500)
 fig_facet.for_each_annotation(lambda a: a.update(text=a.text.replace("job_prestige_binned=", "Job Prestige = ")))
-
 
 
 # Code for app
