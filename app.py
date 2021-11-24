@@ -80,7 +80,14 @@ mydata = gss_clean[['income', 'sex', 'job_prestige']]
 ## Create new features that breaks job_prestige into six categories with equally sized ranges
 mydata['job_prestige_binned'] = pd.cut(mydata.job_prestige, 6)
 ## Reorder the bins 
-mydata.job_prestige_binned = mydata.job_prestige_binned.astype('str').astype('category').cat.reorder_categories(['(15.936, 26.667]',
+# mydata.job_prestige_binned = mydata.job_prestige_binned.astype('str').astype('category').cat.reorder_categories(['(15.936, 26.667]',
+#                                                                                                                  '(26.667, 37.333]',
+#                                                                                                                  '(37.333, 48.0]',
+#                                                                                                                  '(48.0, 58.667]',
+#                                                                                                                  '(58.667, 69.333]',
+#                                                                                                                  '(69.333, 80.0]'])
+## Reorder the bins 
+mydata.job_prestige_binned = mydata.job_prestige_binned.cat.reorder_categories(['(15.936, 26.667]',
                                                                                                                  '(26.667, 37.333]',
                                                                                                                  '(37.333, 48.0]',
                                                                                                                  '(48.0, 58.667]',
