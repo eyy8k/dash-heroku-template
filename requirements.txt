@@ -2,7 +2,7 @@ pandas>=1.0.5 # I'm using version 1.2.4
 plotly>=2.0.9 # I'm using version 5.4.0
 dash>=1.13.4 #I'm using version 2.0.0
 
-# Adding these back in to trouble-shoot
+# Adding these back in in my troubleshooting process
 
 gunicorn>=20.0.4
 dash-renderer>=1.5.1
